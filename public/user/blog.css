@@ -1,0 +1,27 @@
+body {
+    font-family: "Roboto", sans-serif;
+    letter-spacing: 0.9px;
+    overflow-x: hidden;
+    background-color: #fefefe;
+    background-image: -webkit-linear-gradient(#eef .1em, transparent .1em);
+    background-size: 100% 1.4em;
+}
+.card.blogcard{
+    min-height: 320px;
+}
+.card .blogimg img {
+    transition: transform 0.5s ease;
+}
+
+.card:hover .blogimg img {
+    transform: rotate(3deg);
+}
+
+.imagesection{
+    height: 360px;
+    width: 100%;
+}
+.imagesection img{
+    height: 100%;
+    width: 100%;
+}

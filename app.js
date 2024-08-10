@@ -10,6 +10,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const { dashBoardRouter } = require('./admin/routes/dashboard.route');
+const { userRouter } = require('./user/routes/user.route');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -30,6 +31,8 @@ app.use((req, res, next) => {
     res.locals.messages = req.flash();
     next();
 });
+
+app.use('/',userRouter);
 
 app.use('/admin',dashBoardRouter);
 app.use('/admin',adminRouter);
