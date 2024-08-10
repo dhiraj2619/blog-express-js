@@ -1,5 +1,6 @@
 const { Admin } = require("../models/admin.model");
 const jwt = require('jsonwebtoken');
+const { Blog } = require("../models/blog.model");
 
 const getDashboardPage= async (req, res) => {
     try {
@@ -10,7 +11,8 @@ const getDashboardPage= async (req, res) => {
             const adminId = decoded.adminId;
 
             const admin = await Admin.findOne({where:{id:adminId}});
-           return res.render('admin/index',{admin})
+            const blogsCount = await Blog.count();
+           return res.render('admin/index',{admin,blogsCount})
         }
         else{
             req.flash('error', 'Admin not found.');

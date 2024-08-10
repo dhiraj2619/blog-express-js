@@ -24,7 +24,7 @@ const UserController = {
                 return res.render('user/singleblog', { blog })
             }
             else {
-                // return res.redirect('user/');
+                return res.redirect('user/');
             }
         } catch (error) {
             console.error("Unable to get single blog", error);
