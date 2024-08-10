@@ -1,0 +1,27 @@
+.bg-auth{
+    background-image: url('../img/bgauth.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+.x-big{
+    font-size: 17px !important;
+}
+
+.bg-overlay{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .66);
+}
+.fw-semibold{
+    font-weight: 570;
+}
+.w-60{
+    max-width: 70%;
+}
+
+@media(max-width:760px){
+    .bg-auth{
+        display: none;
+    }
+}

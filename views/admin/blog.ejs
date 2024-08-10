@@ -1,0 +1,113 @@
+<%- include('./header.ejs')%>
+
+    <div class="main-content">
+        <div class="container position-relative">
+            <div class="row">
+                <div class="col">
+                    <h3 class="text-dark">Blog</h3>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-main" href="/admin/addblog"><i class="bi bi-plus-circle me-1"></i> new blog</a>
+                </div>
+            </div>
+
+            <div class="position-absolute end-0 top-0">
+                <% if (messages.success) { %>
+                    <div class="">
+                        <div class="alert alert-success alert-dismissible" id="successAlert">
+                            <%= messages.success %>
+                            <button type="button" class="btn-close" style="font-size: 13px;" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-lg-4">
+                    <form method="get" action="/admin/allblogs">
+                        <div class="input-group">
+                            <select class="form-select" name="month" aria-label="Filter by month">
+                                <option value=""disabled selected>Filter by months</option>
+                                <option value="">All</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                                
+                            </select>
+                            <button class="btn btn-outline-secondary" type="submit">Filter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="allblogs mt-3">
+                <div class="row g-3">
+                    <% if(allblogs.length > 0) { %>
+                        <% allblogs.forEach((item) => { %>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                <div class="blog-box">
+                                    <div class="blog-header">
+                                        <img src="/admin/img/blog-dummy.jpg" class="img-fluid overflow-hidden" alt="">
+                                    </div>
+                                    <div class="blog-body p-2">
+                                        <h5 class="blog-title"><%= item.title %></h5>
+                                        <div class="">
+                                            <p class="small mb-0"><%= item.content %></p>
+                                        </div>
+                                        <span class="py-1 small text-main">Date: <%= item.date.toISOString().substring(0, 10) %></span>
+                                    </div>
+                                    <div class="blog-footer border-top p-2 bg-light">
+                                        <div class="text-end">
+                                            <a class="btn btn-sm btn-outline-dark" href="javascript:void(0)" onclick="editBlogForm('<%= item.id %>')"><i class="bi bi-pencil"></i></a>
+                                            <a class="btn btn-sm btn-outline-danger" href="javascript:void(0)" onclick="deleteBlog('<%= item.id %>')"><i class="bi bi-trash"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="col-12">
+                            <h5 class="text-center mt-3">No blogs to show.</h5>
+                        </div>
+                    <% } %>
+                   
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center mt-4">
+                    <% if(currentPage > 1) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<%= currentPage - 1 %>" aria-label="Previous">
+                                <span aria-hidden="true">prev</span>
+                            </a>
+                        </li>
+                    <% } %>
+                    <% for(let i = 1; i <= totalPages; i++) { %>
+                        <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                            <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+                        </li>
+                    <% } %>
+                    <% if(currentPage < totalPages) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<%= currentPage + 1 %>" aria-label="Next">
+                                <span aria-hidden="true">next</span>
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+            </nav>
+            
+        </div>
+
+    </div>
+
+    <%- include('./footer.ejs')%>
